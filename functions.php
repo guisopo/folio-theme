@@ -1,3 +1,5 @@
+<?php
+
 function theme_slug_setup() {
    add_theme_support( 'title-tag' );
 }
