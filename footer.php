@@ -9,7 +9,7 @@
 ?>
 
 <footer id="footer">
-  <!-- Add menu -->
+  <p>This is the footer</p>
 </footer>
 
 </div><!-- #page -->
