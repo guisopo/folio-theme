@@ -32,15 +32,13 @@ function folio_work_info_mb_html($post) {
   $meta_value_units = ( ! empty ( $meta_value['units'] ) ) ? $meta_value['units'] : '';
 
   ?>
-
-    <p>Current Value is: <?php var_dump($meta_value) ?></p>
+    <p>Here you can fill the information of this work. Click the <b>Publish</b> button on the right to update the data.</p>
     <p>
       <label class="post-attributes-label" for="folio_work_title">Title:</label>
       <input
         type="text" 
         name="folio_work[title]" 
         placeholder="Title of your work"
-
         size="20"
         value="<?php echo esc_attr( $meta_value_title ); ?>"
       >
@@ -50,9 +48,9 @@ function folio_work_info_mb_html($post) {
       <input
         type="text" 
         name="folio_work[year]" 
-        placeholder="Year created"
+        placeholder="<?php echo date('Y') ?>"
         pattern="[0-9]{4,4}"
-        size="20"
+        size="4"
         value="<?php echo esc_attr( $meta_value_year ); ?>"
       >
     </p>
@@ -85,6 +83,7 @@ function folio_work_info_mb_html($post) {
         value="<?php echo esc_attr( $meta_value_wide ); ?>"
       >
       <select id="work_units" name="folio_work[units]">
+        <option value="mm" <?php selected( $meta_value['units'], 'mm' ); ?>>mm</option>
         <option value="cm" <?php selected( $meta_value['units'], 'cm' ); ?>>cm</option>
         <option value="m" <?php selected( $meta_value_units, 'm' ); ?>>m</option>
 
