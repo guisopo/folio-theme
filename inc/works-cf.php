@@ -36,8 +36,8 @@ function folio_work_info_mb_html($post) {
     <p>
       <label class="post-attributes-label" for="folio_work_title">Title:</label>
       <input
-        type="text" 
-        name="folio_work[title]" 
+        type="text"
+        name="folio_work[title]"
         placeholder="Title of your work"
         size="20"
         value="<?php echo esc_attr( $meta_value_title ); ?>"
@@ -46,8 +46,8 @@ function folio_work_info_mb_html($post) {
     <p>
       <label class="post-attributes-label" for="folio_work_title">Year:</label>
       <input
-        type="text" 
-        name="folio_work[year]" 
+        type="text"
+        name="folio_work[year]"
         placeholder="<?php echo date('Y') ?>"
         pattern="[0-9]{4,4}"
         size="4"
@@ -57,8 +57,8 @@ function folio_work_info_mb_html($post) {
     <p>
       <label class="post-attributes-label" for="folio_work_material">Material:</label>
       <input
-        type="text" 
-        name="folio_work[material]" 
+        type="text"
+        name="folio_work[material]"
         placeholder="Material used"
 
         size="20"
@@ -68,23 +68,23 @@ function folio_work_info_mb_html($post) {
     <p>
       <label class="post-attributes-label" for="folio_work_size">Size:</label>
       <input
-        type="text" 
-        name="folio_work[length]" 
+        type="text"
+        name="folio_work[length]"
         placeholder="Length"
         size="20"
         value="<?php echo esc_attr( $meta_value_length ); ?>"
       >
       <span>x</span>
       <input
-        type="text" 
-        name="folio_work[wide]" 
+        type="text"
+        name="folio_work[wide]"
         placeholder="Wide"
         size="20"
         value="<?php echo esc_attr( $meta_value_wide ); ?>"
       >
       <select id="work_units" name="folio_work[units]">
-        <option value="mm" <?php selected( $meta_value['units'], 'mm' ); ?>>mm</option>
-        <option value="cm" <?php selected( $meta_value['units'], 'cm' ); ?>>cm</option>
+        <option value="mm" <?php selected( $meta_value_units, 'mm' ); ?>>mm</option>
+        <option value="cm" <?php selected( $meta_value_units, 'cm' ); ?>>cm</option>
         <option value="m" <?php selected( $meta_value_units, 'm' ); ?>>m</option>
 
       </select>
