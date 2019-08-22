@@ -23,10 +23,8 @@ function folio_work_taxonomies() {
     'labels' => $labels,
     'query_var' => true,
     'rewrite' => true,
-    'slug' => 'work_type'
-    // 'show_admin_column' => false,
-    // 'meta_box_cb' => 'work_type_tax_box',
-    // 'meta_box_sanitize_cb' => 'work_type_tax_box_sanitize',
+    'slug' => 'work_type',
+    'meta_box_cb' => 'post_categories_meta_box'
   );
 
   register_taxonomy( 'work_type', 'works', $args);
