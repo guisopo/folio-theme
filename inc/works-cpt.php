@@ -2,6 +2,7 @@
 
 function folio_register_cpt() {
   $supports = array(
+    // 'editor',
     'title',
     'thumbnail',
     'revisions',
@@ -35,6 +36,7 @@ function folio_register_cpt() {
     'has_archive' => true,
     'taxonomies' => $taxonomies,
     'menu_position' => 5,
+    'show_in_rest' => true,
     'menu_icon' => 'dashicons-admin-customizer'
 
   );
