@@ -24,17 +24,12 @@ function folio_register_cpt() {
     'archives' => 'Works Archives'
   );
 
-  $taxonomies = array(
-    'category'
-  );
-
   $args = array(
     'public' => true,
     'supports' => $supports,
     'labels' => $labels,
     'hierarchical' => true,
     'has_archive' => true,
-    'taxonomies' => $taxonomies,
     'menu_position' => 5,
     'show_in_rest' => true,
     'menu_icon' => 'dashicons-admin-customizer'
