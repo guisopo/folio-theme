@@ -10,8 +10,17 @@ function folio_add_work_meta_boxes() {
 
   add_meta_box(
     'folio-work-information',                     // Unique ID
-    esc_html__( 'Work Information', 'string' ),  // Title
+    esc_html__( 'Work Details', 'string' ),  // Title
     'folio_work_info_mb_html',                   // Callback function
+    'works',                                     // Screen
+    'normal',                                    // Context
+    'core'                                       // Priority
+  );
+
+  add_meta_box(
+    'folio-work-description',                     // Unique ID
+    esc_html__( 'Work Description', 'string' ),  // Title
+    'folio_work_description_mb_html',                   // Callback function
     'works',                                     // Screen
     'normal',                                    // Context
     'core'                                       // Priority
@@ -24,15 +33,29 @@ function folio_work_info_mb_html($post) {
   wp_nonce_field( basename( __FILE__ ), 'folio_work_info_nonce' );
 
   $meta_value = get_post_meta( $post->ID, '_folio_work_meta_key', true );
+  $meta_value_category = ( ! empty ( $meta_value['category'] ) ) ? $meta_value['category'] : '';
   $meta_value_title = ( ! empty ( $meta_value['title'] ) ) ? $meta_value['title'] : '';
   $meta_value_year = ( ! empty ( $meta_value['year'] ) ) ? $meta_value['year'] : '';
   $meta_value_material = ( ! empty ( $meta_value['material'] ) ) ? $meta_value['material'] : '';
-  $meta_value_length = ( ! empty ( $meta_value['length'] ) ) ? $meta_value['length'] : '';
-  $meta_value_wide = ( ! empty ( $meta_value['wide'] ) ) ? $meta_value['wide'] : '';
-  $meta_value_units = ( ! empty ( $meta_value['units'] ) ) ? $meta_value['units'] : '';
+  $meta_value_dimensions = ( ! empty ( $meta_value['dimensions'] ) ) ? $meta_value['dimensions'] : '';
+  $meta_value_units = ( ! empty ( $meta_value['units'] ) ) ? $meta_value['units'] : 'cm';
+  $meta_value_duration = ( ! empty ( $meta_value['duration'] ) ) ? $meta_value['duration'] : '';
 
   ?>
-    <p>Here you can fill the information of this work. Click the <b>Publish</b> button on the right to update the data.</p>
+    <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
+    <p>
+      <label class="post-attributes-label" for="folio_work_category">Category:</label>
+      <select id="work_category" name="folio_work[category]">
+        <option value="Painting" <?php selected( $meta_value_category, 'Painting' ); ?>>Painting</option>
+        <option value="Drawing" <?php selected( $meta_value_category, 'Drawing' ); ?>>Drawing</option>
+        <option value="Graphic Art" <?php selected( $meta_value_category, 'Graphic Art' ); ?>>Graphic Art</option>
+        <option value="Performance" <?php selected( $meta_value_category, 'Queramic' ); ?>>Performance</option>
+        <option value="Photography" <?php selected( $meta_value_category, 'Photography' ); ?>>Photography</option>
+        <option value="Video" <?php selected( $meta_value_category, 'Video' ); ?>>Video</option>
+        <option value="Sculpture" <?php selected( $meta_value_category, 'Sculpture' ); ?>>Sculpture</option>
+        <option value="Installation" <?php selected( $meta_value_category, 'Installation' ); ?>>Installation</option>
+      </select>
+    </p>
     <p>
       <label class="post-attributes-label" for="folio_work_title">Title:</label>
       <input
@@ -49,6 +72,7 @@ function folio_work_info_mb_html($post) {
         type="text"
         name="folio_work[year]"
         placeholder="<?php echo date('Y') ?>"
+        maxlength="4"
         pattern="[0-9]{4,4}"
         size="4"
         value="<?php echo esc_attr( $meta_value_year ); ?>"
@@ -60,35 +84,105 @@ function folio_work_info_mb_html($post) {
         type="text"
         name="folio_work[material]"
         placeholder="Material used"
-
         size="20"
         value="<?php echo esc_attr( $meta_value_material ); ?>"
       >
     </p>
     <p>
-      <label class="post-attributes-label" for="folio_work_size">Size:</label>
+      <label class="post-attributes-label" for="folio_work_technique">Technique:</label>
       <input
         type="text"
-        name="folio_work[length]"
-        placeholder="Length"
+        name="folio_work[technique]"
+        placeholder="Technique used"
+
         size="20"
-        value="<?php echo esc_attr( $meta_value_length ); ?>"
+        value="<?php echo esc_attr( $meta_value_technique ); ?>"
       >
-      <span>x</span>
+    </p>
+    <p>
+      <label class="post-attributes-label" for="folio_work_dimensions">Dimensions:</label>
       <input
         type="text"
-        name="folio_work[wide]"
-        placeholder="Wide"
+        name="folio_work[dimensions]"
+        placeholder="height x width x depth"
         size="20"
-        value="<?php echo esc_attr( $meta_value_wide ); ?>"
+        value="<?php echo esc_attr( $meta_value_dimensions ); ?>"
       >
       <select id="work_units" name="folio_work[units]">
         <option value="mm" <?php selected( $meta_value_units, 'mm' ); ?>>mm</option>
         <option value="cm" <?php selected( $meta_value_units, 'cm' ); ?>>cm</option>
         <option value="m" <?php selected( $meta_value_units, 'm' ); ?>>m</option>
-
+        <option value="none" <?php selected( $meta_value_units, 'none' ); ?>>none</option>
       </select>
     </p>
+    <p>
+      <label class="post-attributes-label" for="folio_work_media">Media description:</label>
+      <input
+        type="text"
+        name="folio_work[media]"
+        placeholder="Video (Digital Betacam and DVD)"
+        size="20"
+        value="<?php echo esc_attr( $meta_value_media ); ?>"
+      >
+    </p>
+    <p>
+      <label class="post-attributes-label" for="folio_work_credits">Credits:</label>
+      <textarea
+        name="folio_work[credits]"
+        rows="1"
+        cols="20"
+        placeholder="Director, camera, performance, editing..."
+        value="<?php echo esc_attr( $meta_value_credits ); ?>"
+      >
+      </textarea>
+    </p>
+    <p>
+      <label class="post-attributes-label" for="folio_work_duration">Duration:</label>
+      <input
+        type="text"
+        name="folio_work[duration]"
+        placeholder="00"
+        maxlength="2"
+        pattern="[0-9]{2,2}"
+        size="2"
+        value="<?php echo esc_attr( $meta_value_duration ); ?>"
+      >
+      <span>:</span>
+      <input
+        type="text"
+        name="folio_work[duration]"
+        placeholder="00"
+        maxlength="2"
+        pattern="[0-60]{2,2}"
+        size="2"
+        value="<?php echo esc_attr( $meta_value_duration ); ?>"
+      >
+      <span>:</span>
+      <input
+        type="text"
+        name="folio_work[duration]"
+        placeholder="00"
+        maxlength="2"
+        pattern="[0-9]{2,2}"
+        size="2"
+        value="<?php echo esc_attr( $meta_value_duration ); ?>"
+      >
+    </p>
+  <?php
+}
+
+function folio_work_description_mb_html() {
+  ?>
+
+    <textarea
+      name="folio_work[credits]"
+      rows="1"
+      cols="20"
+      placeholder="Director, camera, performance, editing..."
+      value="<?php echo esc_attr( $meta_value_credits ); ?>"
+    >
+    </textarea>
+
   <?php
 }
 

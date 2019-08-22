@@ -4,8 +4,6 @@ function folio_register_cpt() {
   $supports = array(
     'title',
     'thumbnail',
-    'custom-fields',
-    'page-attributes',
     'revisions',
     'post-formats'
   );
