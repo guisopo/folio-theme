@@ -40,3 +40,13 @@ function folio_register_cpt() {
 }
 
 add_action( 'init', 'folio_register_cpt' );
+
+function custom_enter_title( $input ) {
+    if ( 'works' === get_post_type() ) {
+        return 'Add title of the new work';
+    }
+
+    return $input;
+}
+
+add_filter( 'enter_title_here', 'custom_enter_title' );
