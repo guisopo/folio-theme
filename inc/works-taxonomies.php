@@ -34,7 +34,15 @@ function folio_work_taxonomies() {
 add_action( 'init', 'folio_work_taxonomies' );
 
 function folio_populate_terms() {
-  $work_types = array( 'painting', 'sculpture', 'drawing', 'performance', 'photography', 'video', 'installation' );
+  $work_types = array( 
+    'painting', 
+    'sculpture', 
+    'drawing', 
+    'performance', 
+    'photography', 
+    'video', 
+    'installation' 
+  );
   
   foreach ($work_types as $work_type) {
     wp_insert_term(

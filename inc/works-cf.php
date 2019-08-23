@@ -10,11 +10,11 @@ function folio_add_work_meta_boxes() {
 
   add_meta_box(
     'folio-work-information',                     // Unique ID
-    esc_html__( 'Work Details', 'string' ),  // Title
-    'folio_work_info_mb_html',                   // Callback function
-    'works',                                     // Screen
-    'normal',                                    // Context
-    'core'                                       // Priority
+    esc_html__( 'Work Details', 'string' ),       // Title
+    'folio_work_info_mb_html',                    // Callback function
+    'works',                                      // Screen
+    'normal',                                     // Context
+    'core'                                        // Priority
   );
 }
 
@@ -29,10 +29,10 @@ function folio_work_info_mb_html($post) {
 function folio_save_post_work_meta( $post_id, $post ) {
 
   // Checks save status
-  $is_autosave = wp_is_post_autosave( $post_id );
-  $is_revision = wp_is_post_revision( $post_id );
+  $is_autosave    = wp_is_post_autosave( $post_id );
+  $is_revision    = wp_is_post_revision( $post_id );
   $is_valid_nonce = ( isset( $_POST[ 'folio_work_info_nonce' ] ) && wp_verify_nonce( $_POST[ 'folio_work_info_nonce' ], basename( __FILE__ ) ) ) ? 'true' : 'false';
-  $user_can_edit = current_user_can( 'edit_post', $post_id );
+  $user_can_edit  = current_user_can( 'edit_post', $post_id );
 
   // Exits script depending on save status
   if ( $is_autosave || $is_revision || !$is_valid_nonce || !$user_can_edit ) {
@@ -40,9 +40,10 @@ function folio_save_post_work_meta( $post_id, $post ) {
   }
 
   /* Get the posted data and sanitize it for use as an HTML class. */
-  $new_meta_value = ( isset( $_POST['folio_work'] ) ? array_map( 'sanitize_text_field', $_POST['folio_work'] ) : '' );
+  $new_meta_value = isset( $_POST['folio_work'] ) ? array_map( 'work_fields_sanitize', $_POST['folio_work'] ) : '';
   $cat = $new_meta_value['category'];
-  $new_meta_value['title'] = $_POST['post_title'];
+  $new_meta_value['title'] = sanitize_text_field($_POST['post_title']);
+  $new_meta_value = array_filter($new_meta_value);
 
   /* Get the meta key. */
   $meta_key = '_folio_work_meta_key';
@@ -59,4 +60,12 @@ function folio_save_post_work_meta( $post_id, $post ) {
   /* If there is no new meta value but an old value exists, delete it. */
   elseif ( $new_meta_value === '' && $meta_value )
     delete_post_meta( $post_id, $meta_key, $meta_value );
+}
+
+function work_fields_sanitize( $input ) {
+  if ( $input === $_POST['folio_work']['description'] || $input === $_POST['folio_work']['credits'] ) {
+    return sanitize_textarea_field( $input );
+  } else {
+    return sanitize_text_field( $input );
+  }
 }

@@ -33,10 +33,9 @@ function folio_register_cpt() {
     'menu_position' => 5,
     'show_in_rest'  => true,
     'menu_icon'     => 'dashicons-admin-customizer'
-
   );
 
-  register_post_type( 'works', $args);
+  register_post_type( 'works', $args );
 }
 
 add_action( 'init', 'folio_register_cpt' );
@@ -45,7 +44,6 @@ function custom_enter_title( $input ) {
     if ( 'works' === get_post_type() ) {
         return 'Add title of the new work';
     }
-
     return $input;
 }
 
