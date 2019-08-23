@@ -2,7 +2,6 @@
   $meta_value = get_post_meta( $post->ID, '_folio_work_meta_key', true );
   
   $work_category = ( ! empty ( $meta_value['category'] ) ) ? $meta_value['category'] : '';
-  $work_title = ( ! empty ( $meta_value['title'] ) ) ? $meta_value['title'] : '';
   $work_year = ( ! empty ( $meta_value['year'] ) ) ? $meta_value['year'] : '';
   $work_material = ( ! empty ( $meta_value['material'] ) ) ? $meta_value['material'] : '';
   $work_technique = ( ! empty ( $meta_value['technique'] ) ) ? $meta_value['technique'] : '';
@@ -14,6 +13,7 @@
   $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
 ?> 
   <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
+  <!-- Work Category -->
   <p>
     <label class="post-attributes-label" for="folio_work_category">Category:</label>
     <select id="work_category" name="folio_work[category]">
@@ -22,20 +22,12 @@
           $selected = selected( $work_category, $term->name );
           echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
         }
-      ?></select>
+      ?>
+    </select>
   </p>
+  <!-- Work Year -->
   <p>
-    <label class="post-attributes-label" for="folio_work_title">Title:</label>
-    <input
-      type="text"
-      name="folio_work[title]"
-      placeholder="Title of your work"
-      size="20"
-      value="<?php echo esc_attr( $work_title ); ?>"
-    >
-  </p>
-  <p>
-    <label class="post-attributes-label" for="folio_work_title">Year:</label>
+    <label class="post-attributes-label" for="folio_work_year">Year:</label>
     <input
       type="text"
       name="folio_work[year]"
@@ -46,6 +38,7 @@
       value="<?php echo esc_attr( $work_year ); ?>"
     >
   </p>
+  <!-- Work Material -->
   <p>
     <label class="post-attributes-label" for="folio_work_material">Material:</label>
     <input
@@ -56,17 +49,18 @@
       value="<?php echo esc_attr( $work_material ); ?>"
     >
   </p>
+  <!-- Work Material -->
   <p>
     <label class="post-attributes-label" for="folio_work_technique">Technique:</label>
     <input
       type="text"
       name="folio_work[technique]"
       placeholder="Technique used"
-
       size="20"
       value="<?php echo esc_attr( $work_technique ); ?>"
     >
   </p>
+  <!-- Work Dimensions -->
   <p>
     <label class="post-attributes-label" for="folio_work_dimensions">Dimensions:</label>
     <input
@@ -83,6 +77,7 @@
       <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
     </select>
   </p>
+  <!-- Work Media -->
   <p>
     <label class="post-attributes-label" for="folio_work_media">Media description:</label>
     <input
@@ -93,6 +88,7 @@
       value="<?php echo esc_attr( $work_media ); ?>"
     >
   </p>
+  <!-- Work Credits -->
   <p>
     <label class="post-attributes-label" for="folio_work_credits">Credits:</label>
     <textarea
@@ -104,6 +100,7 @@
     >
     </textarea>
   </p>
+  <!-- Work Duration -->
   <p>
     <label class="post-attributes-label" for="folio_work_duration">Duration:</label>
     <input
@@ -136,6 +133,7 @@
       value="<?php echo esc_attr( $work_duration ); ?>"
     >
   </p>
+  <!-- Work Description -->
   <p>
     <label class="post-attributes-label" for="folio_work_description">Description:</label>
     <textarea
