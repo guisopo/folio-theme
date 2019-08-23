@@ -10,29 +10,29 @@ function folio_register_cpt() {
   );
 
   $labels = array(
-    'name' => 'Works',
-    'singular_name' => 'Work',
-    'add_new' => 'Add New Work',
-    'add_new_item' => 'Add New Work',
-    'edit_item' => 'Edit Work',
-    'new_item' => 'New Work',
-    'view_item' => 'View Work',
-    'all_item' => 'All Works',
-    'search_items' => 'Search Works',
-    'not_found' => 'No Works found',
+    'name'               => 'Works',
+    'singular_name'      => 'Work',
+    'add_new'            => 'Add New Work',
+    'add_new_item'       => 'Add New Work',
+    'edit_item'          => 'Edit Work',
+    'new_item'           => 'New Work',
+    'view_item'          => 'View Work',
+    'all_item'           => 'All Works',
+    'search_items'       => 'Search Works',
+    'not_found'          => 'No Works found',
     'not_found_in_trash' => 'No Works found in trash',
-    'archives' => 'Works Archives'
+    'archives'           => 'Works Archives'
   );
 
   $args = array(
-    'public' => true,
-    'supports' => $supports,
-    'labels' => $labels,
-    'hierarchical' => true,
-    'has_archive' => true,
+    'public'        => true,
+    'supports'      => $supports,
+    'labels'        => $labels,
+    'hierarchical'  => true,
+    'has_archive'   => true,
     'menu_position' => 5,
-    'show_in_rest' => true,
-    'menu_icon' => 'dashicons-admin-customizer'
+    'show_in_rest'  => true,
+    'menu_icon'     => 'dashicons-admin-customizer'
 
   );
 
