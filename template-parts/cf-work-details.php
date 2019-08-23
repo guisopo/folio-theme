@@ -5,13 +5,14 @@
   $work_title = ( ! empty ( $meta_value['title'] ) ) ? $meta_value['title'] : '';
   $work_year = ( ! empty ( $meta_value['year'] ) ) ? $meta_value['year'] : '';
   $work_material = ( ! empty ( $meta_value['material'] ) ) ? $meta_value['material'] : '';
+  $work_technique = ( ! empty ( $meta_value['technique'] ) ) ? $meta_value['technique'] : '';
   $work_dimensions = ( ! empty ( $meta_value['dimensions'] ) ) ? $meta_value['dimensions'] : '';
   $work_units = ( ! empty ( $meta_value['units'] ) ) ? $meta_value['units'] : 'cm';
   $work_duration = ( ! empty ( $meta_value['duration'] ) ) ? $meta_value['duration'] : '';
   $work_description = ( ! empty ( $meta_value['description'] ) ) ? $meta_value['description'] : '';
 
   $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
-?>
+?> 
   <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
   <p>
     <label class="post-attributes-label" for="folio_work_category">Category:</label>
@@ -134,15 +135,14 @@
       size="2"
       value="<?php echo esc_attr( $work_duration ); ?>"
     >
-    <p>
-      <label class="post-attributes-label" for="folio_work_description">Description:</label>
-      <textarea
-        name="folio_work[credits]"
-        rows="1"
-        cols="20"
-        placeholder="Director, camera, performance, editing..."
-        value="<?php echo esc_attr( $work_description ); ?>"
-        >
-      </textarea>
-    </p>
+  </p>
+  <p>
+    <label class="post-attributes-label" for="folio_work_description">Description:</label>
+    <textarea
+      name="folio_work[description]"
+      rows="1"
+      cols="20"
+      >
+      <?php echo esc_attr( $work_description ); ?>
+    </textarea>
   </p>
