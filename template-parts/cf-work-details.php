@@ -1,8 +1,8 @@
 <?php
   $meta_value = get_post_meta( $post->ID, '_folio_work_meta_key', true );
   
-  foreach ($meta_value as $key => $value) {
-    ${'work_'.$key} = $value;
+  foreach( $meta_value as $key => $value ) {
+    ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';;
   }
 
   $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
@@ -66,10 +66,10 @@
       value="<?php echo esc_attr( $work_dimensions ); ?>"
     >
     <select id="work_units" name="folio_work[units]">
+      <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
       <option value="mm" <?php selected( $work_units, 'mm' ); ?>>mm</option>
       <option value="cm" <?php selected( $work_units, 'cm' ); ?>>cm</option>
       <option value="m" <?php selected( $work_units, 'm' ); ?>>m</option>
-      <option value="none" <?php selected( $work_units, 'none' ); ?>>none</option>
     </select>
   </p>
   <!-- Work Media -->
