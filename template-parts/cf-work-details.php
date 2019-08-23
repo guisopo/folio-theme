@@ -91,8 +91,9 @@
       rows="1"
       cols="20"
       placeholder="Director, camera, performance, editing..."
-    ><?php echo esc_attr( $work_credits ); ?>
-    </textarea>
+    ><?php 
+      echo esc_attr( $work_credits ); 
+    ?></textarea>
   </p>
   <!-- Work Duration -->
   <p>
@@ -134,6 +135,7 @@
       name="folio_work[description]"
       rows="5"
       cols="50"
-    ><?php echo esc_attr( $work_description ); ?>
-    </textarea>
+    ><?php 
+      echo esc_attr( $work_description ); 
+    ?></textarea>
   </p>
