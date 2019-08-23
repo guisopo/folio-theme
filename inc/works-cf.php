@@ -41,13 +41,14 @@ function folio_save_post_work_meta( $post_id, $post ) {
 
   /* Get the posted data and sanitize it for use as an HTML class. */
   $new_meta_value = ( isset( $_POST['folio_work'] ) ? array_map( 'sanitize_text_field', $_POST['folio_work'] ) : '' );
+  $cat = $new_meta_value['category'];
+  $new_meta_value['title'] = $_POST['post_title'];
 
   /* Get the meta key. */
   $meta_key = '_folio_work_meta_key';
 
   /* Get the meta value of the custom field key. */
   $meta_value = get_post_meta( $post_id, $meta_key, true );
-  $cat = $new_meta_value['category'];
 
   /* If the new meta value does not match the old value, update it. */
   if ( $new_meta_value && $new_meta_value != $meta_value ) {
