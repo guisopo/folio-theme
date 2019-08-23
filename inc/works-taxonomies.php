@@ -24,16 +24,11 @@ function folio_work_taxonomies() {
     'query_var' => true,
     'rewrite' => true,
     'slug' => 'work_type',
-    'meta_box_cb' => 'post_categories_meta_box'
+    'show_ui' => false,
+    'show_admin_column' => true
   );
 
   register_taxonomy( 'work_type', 'works', $args);
-}
-
-function work_type_tax_box() {
-  ?>
-  <!-- <h1>HOla</h1> -->
-  <?php
 }
 
 add_action( 'init', 'folio_work_taxonomies' );
