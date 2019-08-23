@@ -47,10 +47,13 @@ function folio_save_post_work_meta( $post_id, $post ) {
 
   /* Get the meta value of the custom field key. */
   $meta_value = get_post_meta( $post_id, $meta_key, true );
+  $cat = $new_meta_value['category'];
 
   /* If the new meta value does not match the old value, update it. */
-  if ( $new_meta_value && $new_meta_value != $meta_value )
+  if ( $new_meta_value && $new_meta_value != $meta_value ) {
+    wp_set_post_terms( $post_id, $cat, 'work_type' );
     update_post_meta( $post_id, $meta_key, $new_meta_value );
+  }
 
   /* If there is no new meta value but an old value exists, delete it. */
   elseif ( $new_meta_value === '' && $meta_value )
