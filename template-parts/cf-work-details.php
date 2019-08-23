@@ -10,20 +10,18 @@
   $work_duration = ( ! empty ( $meta_value['duration'] ) ) ? $meta_value['duration'] : '';
   $work_description = ( ! empty ( $meta_value['description'] ) ) ? $meta_value['description'] : '';
 
+  $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
 ?>
   <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
   <p>
     <label class="post-attributes-label" for="folio_work_category">Category:</label>
     <select id="work_category" name="folio_work[category]">
-      <option value="Painting" <?php selected( $work_category, 'Painting' ); ?>>Painting</option>
-      <option value="Drawing" <?php selected( $work_category, 'Drawing' ); ?>>Drawing</option>
-      <option value="Graphic Art" <?php selected( $work_category, 'Graphic Art' ); ?>>Graphic Art</option>
-      <option value="Performance" <?php selected( $work_category, 'Queramic' ); ?>>Performance</option>
-      <option value="Photography" <?php selected( $work_category, 'Photography' ); ?>>Photography</option>
-      <option value="Video" <?php selected( $work_category, 'Video' ); ?>>Video</option>
-      <option value="Sculpture" <?php selected( $work_category, 'Sculpture' ); ?>>Sculpture</option>
-      <option value="Installation" <?php selected( $work_category, 'Installation' ); ?>>Installation</option>
-    </select>
+      <?php 
+        foreach( $taxterms as $term ){
+          $selected = selected( $work_category, $term->name );
+          echo '<option value="'. $term->name .'" '. $selected .'>'. $term->name .'</option>';
+        }
+      ?></select>
   </p>
   <p>
     <label class="post-attributes-label" for="folio_work_title">Title:</label>
