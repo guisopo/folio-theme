@@ -2,7 +2,7 @@
   $meta_value = get_post_meta( $post->ID, '_folio_work_meta_key', true );
   
   foreach( $meta_value as $key => $value ) {
-    ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';;
+    ${'work_'.$key} = ( ! empty ( $value ) ) ? $value : '';
   }
 
   $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
@@ -91,8 +91,8 @@
       rows="1"
       cols="20"
       placeholder="Director, camera, performance, editing..."
-      value="<?php echo esc_attr( $work_credits ); ?>"
     >
+      <?php echo esc_attr( $work_credits ); ?>
     </textarea>
   </p>
   <!-- Work Duration -->
@@ -133,9 +133,9 @@
     <label class="post-attributes-label" for="folio_work_description">Description:</label>
     <textarea
       name="folio_work[description]"
-      rows="1"
-      cols="20"
-      >
+      rows="5"
+      cols="50"
+    >
       <?php echo esc_attr( $work_description ); ?>
     </textarea>
   </p>
