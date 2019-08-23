@@ -1,14 +1,9 @@
 <?php
   $meta_value = get_post_meta( $post->ID, '_folio_work_meta_key', true );
   
-  $work_category = ( ! empty ( $meta_value['category'] ) ) ? $meta_value['category'] : '';
-  $work_year = ( ! empty ( $meta_value['year'] ) ) ? $meta_value['year'] : '';
-  $work_material = ( ! empty ( $meta_value['material'] ) ) ? $meta_value['material'] : '';
-  $work_technique = ( ! empty ( $meta_value['technique'] ) ) ? $meta_value['technique'] : '';
-  $work_dimensions = ( ! empty ( $meta_value['dimensions'] ) ) ? $meta_value['dimensions'] : '';
-  $work_units = ( ! empty ( $meta_value['units'] ) ) ? $meta_value['units'] : 'cm';
-  $work_duration = ( ! empty ( $meta_value['duration'] ) ) ? $meta_value['duration'] : '';
-  $work_description = ( ! empty ( $meta_value['description'] ) ) ? $meta_value['description'] : '';
+  foreach ($meta_value as $key => $value) {
+    ${'work_'.$key} = $value;
+  }
 
   $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
 ?> 
