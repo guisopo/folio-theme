@@ -39,27 +39,17 @@ function work_type_tax_box() {
 add_action( 'init', 'folio_work_taxonomies' );
 
 function folio_populate_terms() {
-  wp_insert_term(
-    'Painting', // the term 
-    'work_type', // the taxonomy
-    array(
-      'slug' => 'painting',
-    )
-  );
-  wp_insert_term(
-    'Sculpture', // the term 
-    'work_type', // the taxonomy
-    array(
-      'slug' => 'sculpture',
-    )
-  );
-  wp_insert_term(
-    'Performance', // the term 
-    'work_type', // the taxonomy
-    array(
-      'slug' => 'performance',
-    )
-  );
+  $work_types = array( 'painting', 'sculpture', 'drawing', 'performance', 'photography', 'video', 'installation' );
+  
+  foreach ($work_types as $work_type) {
+    wp_insert_term(
+      ucfirst($work_type),
+      'work_type',
+      array(
+        'slug' => $work_type,
+      )
+    );
+  }
 }
 
 add_action( 'init', 'folio_populate_terms' );
