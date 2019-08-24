@@ -16,13 +16,28 @@ function folio_add_work_meta_boxes() {
     'normal',                                     // Context
     'core'                                        // Priority
   );
+
+  add_meta_box(
+    'folio-work-gallery',                         // Unique ID
+    esc_html__( 'Work Image Gallery', 'string' ), // Title
+    'folio_work_gallery_mb_html',                 // Callback function
+    'works',                                      // Screen
+    'normal',                                     // Context
+    'core'                                        // Priority
+  );
 }
 
-/* Callback function */
+/* Callback functions */
 function folio_work_info_mb_html($post) {
   wp_nonce_field( basename( __FILE__ ), 'folio_work_info_nonce' );
   
   return require_once( get_template_directory()  . '/template-parts/cf-work-details.php' );
+}
+
+function folio_work_gallery_mb_html($post) {
+  wp_nonce_field( basename( __FILE__ ), 'folio_work_gallery_nonce' );
+  
+  return require_once( get_template_directory()  . '/template-parts/cf-work-gallery.php' );
 }
 
 /* Save the meta box's work metadata. */

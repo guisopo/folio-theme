@@ -6,7 +6,7 @@
   }
 
   $taxterms = get_terms( 'work_type', array( 'get' => 'all' ) );
-?> 
+?>
   <p>Here you can fill the details of this work. Remember to click the <b>Publish</b> button on the right to save the data.</p>
   <!-- Work Category -->
   <p>
@@ -90,7 +90,7 @@
       name="folio_work[credits]"
       rows="1"
       cols="20"
-      placeholder="Director, camera, performance, editing..."
+      placeholder="Director, camera, editing, performance..."
     ><?php 
       echo esc_attr( $work_credits ); 
     ?></textarea>
@@ -133,8 +133,9 @@
     <label class="post-attributes-label" for="folio_work_description">Description:</label>
     <textarea
       name="folio_work[description]"
-      rows="5"
+      rows="1"
       cols="50"
+      placeholder="Description of the work"
     ><?php 
       echo esc_attr( $work_description ); 
     ?></textarea>
