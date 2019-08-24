@@ -84,3 +84,104 @@ function work_fields_sanitize( $input ) {
     return sanitize_text_field( $input );
   }
 }
+
+
+/// OOP
+
+class Sortable_WordPress_Gallery {
+    
+	protected $id;
+	protected $title = '';
+	protected $context = 'advanced';
+  protected $priority = 'high';
+
+  public function __construct($id, $title, $context, $priority) {
+    if ( !$id ) {
+      return;
+    }
+
+    $this->$id = $id;
+
+    if ( !$title ) {
+      $this->title = ucfirst($id);
+    } else {
+      $this->title = ucfirst($title);
+    }
+
+    $available_context = array(
+      'advanced',
+      'side',
+      'normal',
+    );
+
+    if ( in_array($context) ) {
+      $this->context = $context;
+    }
+
+    $available_priority = array(
+      'default',
+      'high',
+      'low'
+    );
+
+    if ( in_array($priority) ) {
+      $this->priority = $priority;
+    }
+
+    add_action( 'add_metaboxes', array($this, 'add_metabox') );
+    add_action( 'save_post', array($this, 'save' ) );
+    add_filter( 'the_content', array( $this, 'render' ) );
+  }
+
+  public function add_meta_box($screen) {
+
+    add_meta_box(
+      $this->id,
+      $this->title,
+      array( $this, 'render_meta_box_content' ),
+      $screen,
+      $this->context,
+      $this->priority
+    );
+  }
+
+  public function render_meta_box_content( $post ) {
+    wp_nonce_field( $this->id . '_metabox', $this->id . '_metabox_nonce' );
+    $sortable_gallery = get_post_meta( $post->ID, '_' . $this->id . '_sortable_wordpress_gallery', true );
+
+    require_once( get_template_directory()  . '/template-parts/cf-work-gallery.php' );
+  }
+
+  public function save( $post_id ) {
+
+    if( !isset( $POST[$this->id . '_meta_box_nonce'] ) ) {
+      return $post_id;
+    }
+
+    $nonce = $POST[$this->id . '_meta_box_nonce'];
+
+    if ( !wp_verify_nonce( $nonce, $this->id . '_metabox' ) ) {
+      return $post_id;
+    }
+
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+      return $post_id;
+    }
+
+    if ( 'page' == $_POST['post_type'] ) {
+      if ( ! current_user_can( 'edit_page', $post_id ) ) {
+          return $post_id;
+      }
+    } else {
+        if ( ! current_user_can( 'edit_post', $post_id ) ) {
+            return $post_id;
+        }
+    }
+
+    $gallery = sanitize_text_field($POST['_'. $this->id . '_sortable_wordpress_gallery']);
+
+    update_post_meta($post_id, '_' . $this->id . '_sortable_wordpress_gallery', $gallery );
+  }
+
+
+}
