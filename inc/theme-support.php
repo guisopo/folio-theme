@@ -14,7 +14,9 @@ function folio_theme_setup() {
   add_theme_support( 'title-tag' );
   add_theme_support( 'post-thumbnails' );
   add_theme_support( 'post-formats', $post_formats);
-  add_theme_support( 'html5', $html5 );     
+  add_theme_support( 'html5', $html5 );
+
+  add_image_size( 'admin-list-thumb', 80, 80, true);
 }
 
 add_action( 'after_setup_theme', 'folio_theme_setup' );
