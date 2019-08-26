@@ -1,11 +1,14 @@
 <?php
 
-/* Add meta boxes on the 'add_meta_boxes' hook. */
+/**
+ * Hooks 
+ */
 add_action( 'add_meta_boxes', 'folio_add_work_meta_boxes' );
-/* Save post meta on the 'save_post' hook. */
 add_action( 'save_post', 'folio_save_post_work_meta', 10, 2 );
 
-/* Meta boxes to be displayed on the work editor screen. */
+/**
+ * Meta Boxes to be displayed on the Work CPT
+ */
 function folio_add_work_meta_boxes() {
 
   add_meta_box(
@@ -19,28 +22,30 @@ function folio_add_work_meta_boxes() {
 
   add_meta_box(
     'folio-work-gallery',                         // Unique ID
-    esc_html__( 'Work Image Gallery', 'string' ), // Title
+    esc_html__( 'Image Gallery', 'string' ),      // Title
     'folio_work_gallery_mb_html',                 // Callback function
-    'works',                                      // Screen
+    'works',                                  // Screen
     'normal',                                     // Context
     'core'                                        // Priority
   );
 }
 
-/* Callback functions */
+/**
+ * Display Callback Functions
+ */
 function folio_work_info_mb_html($post) {
   wp_nonce_field( basename( __FILE__ ), 'folio_work_info_nonce' );
   
   return require_once( get_template_directory()  . '/template-parts/cf-work-details.php' );
 }
 
-function folio_work_gallery_mb_html($post) {
-  wp_nonce_field( basename( __FILE__ ), 'folio_work_gallery_nonce' );
-  
-  return require_once( get_template_directory()  . '/template-parts/cf-work-gallery.php' );
+function folio_work_gallery_mb_html() {
+
 }
 
-/* Save the meta box's work metadata. */
+/**
+ * Save Metadata 
+ */
 function folio_save_post_work_meta( $post_id, $post ) {
 
   // Checks save status
@@ -77,111 +82,13 @@ function folio_save_post_work_meta( $post_id, $post ) {
     delete_post_meta( $post_id, $meta_key, $meta_value );
 }
 
+/**
+ * Sanitization Helper
+ */
 function work_fields_sanitize( $input ) {
   if ( $input === $_POST['folio_work']['description'] || $input === $_POST['folio_work']['credits'] ) {
     return sanitize_textarea_field( $input );
   } else {
     return sanitize_text_field( $input );
   }
-}
-
-
-/// OOP
-
-class Sortable_WordPress_Gallery {
-    
-	protected $id;
-	protected $title = '';
-	protected $context = 'advanced';
-  protected $priority = 'high';
-
-  public function __construct($id, $title, $context, $priority) {
-    if ( !$id ) {
-      return;
-    }
-
-    $this->$id = $id;
-
-    if ( !$title ) {
-      $this->title = ucfirst($id);
-    } else {
-      $this->title = ucfirst($title);
-    }
-
-    $available_context = array(
-      'advanced',
-      'side',
-      'normal',
-    );
-
-    if ( in_array($context) ) {
-      $this->context = $context;
-    }
-
-    $available_priority = array(
-      'default',
-      'high',
-      'low'
-    );
-
-    if ( in_array($priority) ) {
-      $this->priority = $priority;
-    }
-
-    add_action( 'add_metaboxes', array($this, 'add_metabox') );
-    add_action( 'save_post', array($this, 'save' ) );
-    add_filter( 'the_content', array( $this, 'render' ) );
-  }
-
-  public function add_meta_box($screen) {
-
-    add_meta_box(
-      $this->id,
-      $this->title,
-      array( $this, 'render_meta_box_content' ),
-      $screen,
-      $this->context,
-      $this->priority
-    );
-  }
-
-  public function render_meta_box_content( $post ) {
-    wp_nonce_field( $this->id . '_metabox', $this->id . '_metabox_nonce' );
-    $sortable_gallery = get_post_meta( $post->ID, '_' . $this->id . '_sortable_wordpress_gallery', true );
-
-    require_once( get_template_directory()  . '/template-parts/cf-work-gallery.php' );
-  }
-
-  public function save( $post_id ) {
-
-    if( !isset( $POST[$this->id . '_meta_box_nonce'] ) ) {
-      return $post_id;
-    }
-
-    $nonce = $POST[$this->id . '_meta_box_nonce'];
-
-    if ( !wp_verify_nonce( $nonce, $this->id . '_metabox' ) ) {
-      return $post_id;
-    }
-
-    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-      return $post_id;
-    }
-
-    if ( 'page' == $_POST['post_type'] ) {
-      if ( ! current_user_can( 'edit_page', $post_id ) ) {
-          return $post_id;
-      }
-    } else {
-        if ( ! current_user_can( 'edit_post', $post_id ) ) {
-            return $post_id;
-        }
-    }
-
-    $gallery = sanitize_text_field($POST['_'. $this->id . '_sortable_wordpress_gallery']);
-
-    update_post_meta($post_id, '_' . $this->id . '_sortable_wordpress_gallery', $gallery );
-  }
-
-
 }
