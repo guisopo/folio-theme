@@ -6,8 +6,6 @@
  */
 
 function folio_admin_scripts() {
-     
-  wp_enqueue_script( 'folio-gallery-js', get_template_directory_uri() . '/folio-gallery.js', array('jquery'), null, true );
    
 }
 add_action( 'admin_enqueue_scripts','folio_admin_scripts' );
