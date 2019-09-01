@@ -13,21 +13,22 @@ get_header();
 <div id="primary" class="content-area">
   <main id="main">
 
-    <?php
-    if ( have_posts() ) :
+  <?php
+    $terms = get_terms( 'work_type' );
 
-      while ( have_posts() ) : the_post();
+    foreach ( $terms as $term ) {
 
-        get_template_part( 'template-parts/content', get_post_format() );
-        
-      endwhile;
-      
-      else :
-        
-        get_template_part( 'template-parts/content', 'none' );
-        
-    endif;
-    ?>
+      $term_link = esc_url( get_term_link( $term->name, $term->taxonomy ) );
+
+      echo (
+        '<h2>
+          <a href="' . $term_link  . '">' 
+            . $term->name . 
+          '</a>
+        </h2>'
+      );
+    }
+  ?>
 
   </main><!-- #main -->
 </div><!-- #primary -->
