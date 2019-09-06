@@ -9,7 +9,14 @@
 ?>
 
 <footer id="footer">
-  <p>This is the footer</p>
+  <?php
+    $menu_args = array(
+      'theme_loaction' => 'primary',
+      'menu_class'     => 'nav-menu'
+    );
+
+    wp_nav_menu( $menu_args );
+  ?>
 </footer>
 
 </div><!-- #page -->
