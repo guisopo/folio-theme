@@ -8,6 +8,7 @@
 function folio_admin_scripts() {
    
 }
+
 add_action( 'admin_enqueue_scripts','folio_admin_scripts' );
 
 function folio_load_scripts() {
