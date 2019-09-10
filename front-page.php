@@ -20,13 +20,13 @@ get_header();
           'orderby'    => 'count',
           'order'      => 'DESC'
         );
-        $terms = get_terms( $args );
+        $terms = get_terms( $terms_args );
         $term_class = 'work_type';
 
         foreach ( $terms as $term ) {
 
           $term_link = esc_url( get_term_link( $term->name, $term->taxonomy ) );
-          var_dump($term->count);
+
           echo (
             '<li class="' . $term_class . '">
                 <a href="' . $term_link  . '">
