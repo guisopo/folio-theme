@@ -18,19 +18,19 @@ get_header();
 
     ?>
 
-      <h1><?php single_term_title(); ?> <h1>
+      <h1><?php single_term_title(); ?> </h1>
 
-      <ul>
+      <div>
         <?php
 
         while ( have_posts() ) :
           the_post();
 
-          get_template_part( 'template-parts/content', get_post_type() );
+          get_template_part( 'template-parts/content', get_post_format() );
         endwhile;
 
         ?>
-      </ul>
+      </div>
     <?php
 
     endif; 
