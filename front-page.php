@@ -21,14 +21,13 @@ get_header();
           'order'      => 'DESC'
         );
         $terms = get_terms( $terms_args );
-        $term_class = 'work_type';
 
         foreach ( $terms as $term ) {
 
           $term_link = esc_url( get_term_link( $term->name, $term->taxonomy ) );
 
           echo (
-            '<li class="' . $term_class . '">
+            '<li class="' . $term->taxonomy . '">
                 <a href="' . $term_link  . '">
                   '. $term->name .'
                 </a>
