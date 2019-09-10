@@ -6,8 +6,6 @@
  *
  * @package Folio
  */
-
-get_header();
 ?>
 
 <?php 
@@ -16,59 +14,47 @@ get_header();
 	$taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
 ?>
 
-<div id="primary" class="content-area container">
-  <main id="main" class="site-main">
+<article>
+	<header>
+		<div>
+			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		</div>
+		<div>
+			<p>
+				<a href=<?php echo $taxonomy_link ?>>
+					<span><?php echo $meta['work_type'] ?></span>
+				</a>
+				<span><?php echo $meta['date_completed'] ?></span>
+			</p>
+		</div>
+	</header>
 
-		<article>
-			<header>
-				<div>
-					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-				</div>
-				<div>
-					<p>
-						<a href=<?php echo $taxonomy_link ?>>
-							<span><?php echo $meta['work_type'] ?></span>
-						</a>
-						<span><?php echo $meta['date_completed'] ?></span>
-					</p>
-				</div>
-			</header>
+	<div>
+		<p><?php echo $meta['description'] ?></p>
+	</div>
 
-			<div>
-				<p><?php echo $meta['description'] ?></p>
-			</div>
+	<div>
+		<?php
+			$images = explode(',', $meta['gallery'] );
 
-			<div>
-				<?php
-					$images = explode(',', $meta['gallery'] );
+			foreach ($images as $image) {
+				$pic =  wp_get_attachment_image( $image, 'thumbnail', false );
+				
+				echo '<div>' . $pic . '</div>';
+			}
+			
+		?>
+	</div>
+</article>
 
-					foreach ($images as $image) {
-						$pic =  wp_get_attachment_image( $image, 'thumbnail', false );
-						
-						echo '<div>' . $pic . '</div>';
-					}
-					
-				?>
-			</div>
-		</article>
-  
-    <div>
-			<span>
-				<?php previous_post_link( '%link', 'Previous', TRUE, '', 'work_type' ); ?>
-			</span>
-			<span>
-				<a href=<?php echo $taxonomy_link ?>>Close</a>
-			</span>
-			<span>
-				<?php next_post_link( '%link', 'Next', TRUE, '', 'work_type' ); ?>
-			</span>
-    </div>
-
-  </main><!-- #main -->
-
-</div><!-- #primary -->
-
-<?php
-get_footer();
-
-
+<div>
+	<span>
+		<?php previous_post_link( '%link', 'Previous', TRUE, '', 'work_type' ); ?>
+	</span>
+	<span>
+		<a href=<?php echo $taxonomy_link ?>>Close</a>
+	</span>
+	<span>
+		<?php next_post_link( '%link', 'Next', TRUE, '', 'work_type' ); ?>
+	</span>
+</div>
