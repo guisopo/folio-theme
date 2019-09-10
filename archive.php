@@ -16,12 +16,12 @@ get_header();
     <?php 
     if ( have_posts() ) :
 
-      if( is_tax( 'work_type' ) ) :
-      ?>
+    ?>
 
-        <h1><?php single_term_title(); ?> <h1>
-        <ul>
-      <?php
+      <h1><?php single_term_title(); ?> <h1>
+
+      <ul>
+        <?php
 
         while ( have_posts() ) :
           the_post();
@@ -29,11 +29,9 @@ get_header();
           get_template_part( 'template-parts/content', get_post_type() );
         endwhile;
 
-      ?>
-
-      <?php
-        
-      endif;
+        ?>
+      </ul>
+    <?php
 
     endif; 
     ?>
