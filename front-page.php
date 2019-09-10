@@ -15,13 +15,18 @@ get_header();
 
     <ul class="work_types">
       <?php
-        $terms = get_terms( 'work_type' );
+        $terms_args = array(
+          'taxonomy'   => 'work_type',
+          'orderby'    => 'count',
+          'order'      => 'DESC'
+        );
+        $terms = get_terms( $args );
         $term_class = 'work_type';
 
         foreach ( $terms as $term ) {
 
           $term_link = esc_url( get_term_link( $term->name, $term->taxonomy ) );
-
+          var_dump($term->count);
           echo (
             '<li class="' . $term_class . '">
                 <a href="' . $term_link  . '">
@@ -32,6 +37,10 @@ get_header();
         }
       ?>
     </ul>
+
+    <div class="image-container">
+      This will be the image container
+    </div>
 
   </main><!-- #main -->
 </div><!-- #primary -->
