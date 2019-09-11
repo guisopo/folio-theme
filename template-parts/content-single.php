@@ -11,7 +11,8 @@
 <?php 
   $id = get_the_ID();
   $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-	$taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
+	$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
+	$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
 ?>
 
 <article>
@@ -21,10 +22,12 @@
 		</div>
 		<div>
 			<p>
-				<a href=<?php echo $taxonomy_link ?>>
+				<a href=<?php echo $work_type_taxonomy_link ?>>
 					<span><?php echo $meta['work_type'] ?></span>
 				</a>
-				<span><?php echo $meta['date_completed'] ?></span>
+				<a href=<?php echo $date_completed_taxonomy_link ?>>
+					<span><?php echo $meta['date_completed'] ?></span>
+				</a>
 			</p>
 		</div>
 	</header>

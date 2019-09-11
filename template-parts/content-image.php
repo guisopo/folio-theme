@@ -14,7 +14,7 @@
 ?>
 
 <div>
-  <a href="">
+  <a href=<?php echo get_the_permalink(); ?>>
     <div>
       <img src=<?php echo $image_url ?> />
     </div>
