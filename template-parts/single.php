@@ -54,4 +54,4 @@
 
 <?php
 
-render_post_nav($work_type_taxonomy_link);
+echo render_post_nav($work_type_taxonomy_link, 'work_type');
