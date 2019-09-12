@@ -41,7 +41,7 @@
 			$images = explode(',', $meta['gallery'] );
 
 			foreach ($images as $image) {
-				$picture =  wp_get_attachment_image( $image, 'thumbnail', false );
+				$picture =  wp_get_attachment_image( $image, 'medium', false );
 				
 				echo '<div>' . $picture . '</div>';
 			}
