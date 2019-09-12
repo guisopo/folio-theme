@@ -44,14 +44,6 @@ $date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_co
 
 </article>
 
-<div>
-	<span>
-		<?php previous_post_link( '%link', 'Previous', TRUE, '', 'work_type' ); ?>
-	</span>
-	<span>
-		<a href=<?php echo $work_type_taxonomy_link ?>>Close</a>
-	</span>
-	<span>
-		<?php next_post_link( '%link', 'Next', TRUE, '', 'work_type' ); ?>
-	</span>
-</div>
+<?php
+
+echo render_post_nav($work_type_taxonomy_link, 'work_type');

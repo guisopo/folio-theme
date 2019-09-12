@@ -18,14 +18,14 @@ function render_post_nav( $go_back_link, $taxonomy ) {
   $next_link = get_next_post_link( '%link', 'Next', TRUE, '', $taxonomy );
 
   return '
-    <div class="work-navigation">
-      <span class="previous-work">
+    <div class="post-navigation">
+      <span class="previous-post">
         '. $previous_link .'
       </span>
       <span class="go-back-button">
         <a href='. $go_back_link .'>Close</a>
       </span>
-      <span class="next-work">
+      <span class="next-post">
         '. $next_link .'
       </span>
     </div>';
