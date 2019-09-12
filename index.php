@@ -10,27 +10,21 @@
 get_header();
 ?>
 
-<div id="primary" class="content-area">
-  <main id="main">
+  <?php
+  if ( have_posts() ) :
 
-    <?php
-    if ( have_posts() ) :
+    while ( have_posts() ) : the_post();
 
-      while ( have_posts() ) : the_post();
-
-        get_template_part( 'template-parts/content', get_post_format() );
-        
-      endwhile;
+      get_template_part( 'template-parts/content', get_post_format() );
       
-      else :
-        
-        get_template_part( 'template-parts/content', 'none' );
-        
-    endif;
-    ?>
-
-  </main><!-- #main -->
-</div><!-- #primary -->
+    endwhile;
+    
+    else :
+      
+      get_template_part( 'template-parts/content', 'none' );
+      
+  endif;
+  ?>
 
 <?php
 get_footer();

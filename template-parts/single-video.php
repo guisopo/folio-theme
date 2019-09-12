@@ -6,17 +6,15 @@
  *
  * @package Folio
  */
+
+$id = get_the_ID();
+$meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
+$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
+$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
 ?>
 
-<?php 
-  $id = get_the_ID();
-  $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-	$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
-	$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
-?>
-
-<article>
-	<header>
+<article class="article work">
+	<header class="article-header">
 		<div>
 			<h1><?php the_title(); ?></h1>
 		</div>

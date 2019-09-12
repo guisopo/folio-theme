@@ -11,3 +11,4 @@ require get_template_directory().'/inc/cleanup.php';
 require get_template_directory().'/inc/enqueue.php';
 require get_template_directory().'/inc/menu-management.php';
 require get_template_directory().'/inc/folio-template-tags.php';
+

@@ -10,35 +10,27 @@
 get_header();
 ?>
 
-<div id="primary" class="content-area container">
-  <main id="main" class="site-main">
+<h1 class="work-type"><?php single_term_title(); ?> </h1>
 
-    <?php 
-    if ( have_posts() ) :
+<?php 
+if ( have_posts() ) :
+?>
 
-    ?>
-
-      <h1><?php single_term_title(); ?> </h1>
-
-      <div>
-        <?php
-
-        while ( have_posts() ) :
-          the_post();
-
-          get_template_part( 'template-parts/content', get_post_format() );
-        endwhile;
-
-        ?>
-      </div>
+  <ul class="work-list">
     <?php
 
-    endif; 
+    while ( have_posts() ) :
+      the_post();
+
+      get_template_part( 'template-parts/content', get_post_format() );
+    endwhile;
+
     ?>
+  </ul><!-- .work-list -->
+<?php
 
-  </main><!-- #main -->
-
-</div><!-- #primary -->
+endif; 
+?>
 
 <?php
 get_footer();

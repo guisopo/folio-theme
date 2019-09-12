@@ -20,10 +20,16 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-  <h1>
-    <a href="<?php echo esc_url( home_url( '/') ); ?>">
-      <?php bloginfo( 'name' ); ?>
-    </a>
-  </h1>
+  <div class="page">
 
-  <div id="page" class="site">
+    <header class="page__header">
+      
+      <div class="header__logo">
+        <a href="<?php echo esc_url( home_url( '/') ); ?>">
+          <?php bloginfo( 'name' ); ?>
+        </a>
+      </div>
+  
+    </header><!-- .page__header-->
+  
+    <main id="main" class="site-main">

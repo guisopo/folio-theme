@@ -8,20 +8,22 @@
  */
 ?>
 
-<footer id="footer">
-  <?php
-    $menu_args = array(
-      'theme_loaction' => 'primary',
-      'menu_class'     => 'nav-menu'
-    );
+      </main><!-- #main -->
+      
+      <footer id="footer">
+        <?php
+          $menu_args = array(
+            'theme_loaction' => 'primary',
+            'menu_class'     => 'nav-menu'
+          );
 
-    wp_nav_menu( $menu_args );
-  ?>
-</footer>
+          wp_nav_menu( $menu_args );
+        ?>
+      </footer>
 
-</div><!-- #page -->
+    </div><!-- #page -->
 
-<?php wp_footer(); ?>
+    <?php wp_footer(); ?>
 
-</body>
+  </body>
 </html>
