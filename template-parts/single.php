@@ -8,47 +8,47 @@
  */
 
   $id = get_the_ID();
-  $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-	$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
-	$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
+  $work_data = get_post_meta( $id, '_avant_folio_work_info_key', true); 
+	$work_type_taxonomy_link = get_term_link( $work_data['work_type'], 'work_type');
+	$date_completed_taxonomy_link = get_term_link( $work_data['date_completed'], 'date_completed');
 ?>
 
-<article class="article">
+<article class="article post">
 
-	<header class="article-header">
+	<header class="article__header post__header">
 
-		<h1 class="work-title"><?php the_title(); ?></h1>
+		<h1 class="post__title"><?php the_title(); ?></h1>
 
-		<p class="work-taxonomies">
+		<p class="taxonomies post__taxonomies">
 
-			<a class="work-link" href=<?php echo $work_type_taxonomy_link ?>>
-				<span class="work-taxonomy"><?php echo $meta['work_type'] ?></span>
+			<a class="taxonomy__link" href=<?php echo $work_type_taxonomy_link ?>>
+				<?php echo $work_data['work_type'] ?>
 			</a>
 
-			<a class="work-link" href=<?php echo $date_completed_taxonomy_link ?>>
-				<span class="work-taxonomy"><?php echo $meta['date_completed'] ?></span>
+			<a class="taxonomy__link" href=<?php echo $date_completed_taxonomy_link ?>>
+				<?php echo $work_data['date_completed'] ?>
 			</a>
 
 		</p>
 
 	</header><!-- article-header -->
 
-	<div class="work-description">
-		<p class="work-data"><?php echo $meta['description'] ?></p>
+	<div class="post__content">
+		<p><?php echo $work_data['description'] ?></p>
 	</div>
 
-	<div class="work-image-container">
+	<figure class="post__figure">
 		<?php
-			$images = explode(',', $meta['gallery'] );
+			$images = explode(',', $work_data['gallery'] );
 
 			foreach ($images as $image) {
 				$picture =  wp_get_attachment_image( $image, 'medium', false );
 				
-				echo '<div class="work-image">' . $picture . '</div>';
+				echo '<div class="post__image">' . $picture . '</div>';
 			}
 			
 		?>
-	</div>
+	</figure>
 
 </article><!-- article -->
 

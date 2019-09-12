@@ -10,14 +10,14 @@
 $date_completed = folio_return_custom_taxonomy( 'date_completed' );
 ?>
 
-<li class="work-item work-item--grid">
+<li class="post-item post-item--list">
 
-  <h2 class="work-item__title">
-    <a class="work-item__link" href=<?php echo esc_url( get_permalink() ); ?>>
+  <h2 class="post-item__title">
+    <a class="post-item__link" href=<?php echo esc_url( get_permalink() ); ?>>
       <?php the_title(); ?>
     </a>
   </h2>
 
-  <p class="work-item__year"><?php echo $date_completed ?></p>
+  <p class="post-item__taxonomy"><?php echo $date_completed ?></p>
   
-</li><!-- .work-item -->
+</li><!-- .post-item -->

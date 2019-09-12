@@ -11,23 +11,23 @@ $id = get_the_ID();
 $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
 ?>
 
-<article class="work">
+<article class="post">
 
-	<div class="work__image-container">
+	<figure class="post__image-container">
 		<?php the_post_thumbnail( 'medium' ); ?>
-	</div>
+	</figure>
 
-	<div class="work__information">
-		<p class="work__data">
-			<span class="work__information"><?php echo the_title(); ?>,&nbsp</span>
-			<span class="work__information"><?php echo $meta['date_completed'];?></span>
+	<div class="post__information">
+		<p class="post__data">
+			<?php echo the_title(); ?>,&nbsp
+			<?php echo $meta['date_completed'];?>
 		</p>
-		<p class="work__data">
-			<span class="work__information"><?php echo $meta['material'];?></span>
+		<p class="post__data">
+			<?php echo $meta['material'];?>
 		</p>
-		<p class="work__data">
-			<span class="work__information"><?php echo $meta['dimensions'];?>&nbsp</span>
-			<span class="work__information"><?php echo $meta['units'];?></span>
+		<p class="post__data">
+			<?php echo $meta['dimensions'];?>&nbsp
+			<?php echo $meta['units'];?>
 		</p>
 	</div>
 

@@ -10,13 +10,13 @@
 get_header();
 ?>
 
-<h1 class="work-type"><?php single_term_title(); ?> </h1>
+<h1 class="term-name"><?php single_term_title(); ?> </h1>
 
 <?php 
 if ( have_posts() ) :
 ?>
 
-  <ul class="work-list">
+  <ul class="term-list">
     <?php
 
     while ( have_posts() ) :
@@ -26,7 +26,7 @@ if ( have_posts() ) :
     endwhile;
 
     ?>
-  </ul><!-- .work-list -->
+  </ul><!-- .term-list -->
 <?php
 
 endif; 

@@ -8,39 +8,42 @@
  */
 
 $id = get_the_ID();
-$meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
-$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
+$work_data = get_post_meta( $id, '_avant_folio_work_info_key', true); 
+$work_type_taxonomy_link = get_term_link( $work_data['work_type'], 'work_type');
+$date_completed_taxonomy_link = get_term_link( $work_data['date_completed'], 'date_completed');
 ?>
 
-<article class="article work">
-	<header class="article-header">
-		<div>
-			<h1><?php the_title(); ?></h1>
-		</div>
-		<div>
-			<p>
-				<a href=<?php echo $work_type_taxonomy_link ?>>
-					<span><?php echo $meta['work_type']; ?></span>
-				</a>
-				<a href=<?php echo $date_completed_taxonomy_link ?>>
-					<span><?php echo $meta['date_completed']; ?></span>
-				</a>
-			</p>
-		</div>
-	</header>
+<article class="article post work">
 
-	<div>
-		<p><?php echo $meta['description']; ?></p>
+	<header class="article-header post__header">
+
+		<h1 class="post_title"><?php the_title(); ?></h1>
+
+		<p class="taxonomy post__taxonomies">
+
+			<a class="taxonomy__link" href=<?php echo $work_type_taxonomy_link ?>>
+				<span><?php echo $work_data['work_type']; ?></span>
+			</a>
+
+			<a class="taxonomy__link" href=<?php echo $date_completed_taxonomy_link ?>>
+				<span><?php echo $work_data['date_completed']; ?></span>
+			</a>
+
+		</p>
+
+	</header><!-- article-header -->
+
+	<div class="post__content">
+		<p><?php echo $work_data['description']; ?></p>
 	</div>
 
-	<div>
-		<p><?php echo $meta['credits']; ?></p>
+	<div class="post__content">
+		<p><?php echo $work_data['credits']; ?></p>
 	</div>
 
-  <div>
+  <figure class="work__image-container">
     <?php the_post_thumbnail( 'medium' ); ?>
-  </div>
+  </figure>
 
 </article>
 
