@@ -8,46 +8,28 @@
  */
 ?>
 
-<?php 
+<?php
   $id = get_the_ID();
   $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-	$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
-	$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
 ?>
 
 <article>
-	<header>
 		<div>
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+			<?php the_post_thumbnail( 'medium' ); ?>
 		</div>
 		<div>
 			<p>
-				<a href=<?php echo $work_type_taxonomy_link ?>>
-					<span><?php echo $meta['work_type'] ?></span>
-				</a>
-				<a href=<?php echo $date_completed_taxonomy_link ?>>
-					<span><?php echo $meta['date_completed'] ?></span>
-				</a>
+				<span><?php echo the_title(); ?>,&nbsp</span>
+				<span><?php echo $meta['date_completed'];?></span>
+			</p>
+			<p>
+				<span><?php echo $meta['material'];?></span>
+			</p>
+			<p>
+				<span><?php echo $meta['dimensions'];?>&nbsp</span>
+				<span><?php echo $meta['units'];?></span>
 			</p>
 		</div>
-	</header>
-
-	<div>
-		<p><?php echo $meta['description'] ?></p>
-	</div>
-
-	<div>
-		<?php
-			$images = explode(',', $meta['gallery'] );
-
-			foreach ($images as $image) {
-				$picture =  wp_get_attachment_image( $image, 'thumbnail', false );
-				
-				echo '<div>' . $picture . '</div>';
-			}
-			
-		?>
-	</div>
 </article>
 
 <div>
@@ -61,4 +43,3 @@
 		<?php next_post_link( '%link', 'Next', TRUE, '', 'work_type' ); ?>
 	</span>
 </div>
-      
