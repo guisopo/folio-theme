@@ -61,7 +61,7 @@ function folio_render_post_nav( $taxonomy ) {
  * @see get_terms()
  * @see get_term_link()
  */
-function folio_create_taxonmy_list( $tax_name ) {
+function folio_render_taxonmy_list( $tax_name ) {
 
   $terms_args = array(
     'taxonomy'   => $tax_name,
