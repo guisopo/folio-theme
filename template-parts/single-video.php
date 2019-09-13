@@ -17,8 +17,8 @@ $meta = folio_get_post_meta( get_the_ID() );
 		<h1 class="post__title"><?php the_title(); ?></h1>
 
 		<p class="taxonomies post__taxonomies">
-
 			<?php echo folio_return_custom_taxonomy( 'work_type' ); ?>
+			-
 			<?php echo folio_return_custom_taxonomy( 'date_completed' ); ?>
 
 		</p>
@@ -37,7 +37,7 @@ $meta = folio_get_post_meta( get_the_ID() );
 
 	</div>
 
-	<figure class="work__image-container">
+	<figure class="post__image-container">
 
 		<?php the_post_thumbnail( 'medium' ); ?>
 		
