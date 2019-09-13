@@ -22,7 +22,7 @@
 
   <div class="page">
 
-    <header class="page__header">
+    <header class="page__header header">
 
       <div class="header__logo">
 
@@ -34,4 +34,4 @@
   
     </header><!-- .page__header-->
   
-    <main id="main" class="site-main">
+    <main id="main" class="page__main">

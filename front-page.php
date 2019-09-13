@@ -14,7 +14,7 @@ get_header();
 
   <?php 
     // Create UL with links to the given taxonomy
-    echo create_taxonmy_list( 'work_type' ); 
+    echo folio_create_taxonmy_list( 'work_type' ); 
   ?>
 
   <div class="image-container">

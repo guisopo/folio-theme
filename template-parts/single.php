@@ -7,51 +7,38 @@
  * @package Folio
  */
 
-  $id = get_the_ID();
-  $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-	$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
-	$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
+$meta = folio_get_post_meta( get_the_ID() );
 ?>
 
-<article class="article post">
+<article class="post">
 
-	<header class="article__header post__header">
+	<header class="post__header">
 
 		<h1 class="post__title"><?php the_title(); ?></h1>
 
 		<p class="taxonomies post__taxonomies">
 
-			<a class="taxonomy__link" href=<?php echo $work_type_taxonomy_link ?>>
-				<?php echo $meta['work_type'] ?>
-			</a>
-
-			<a class="taxonomy__link" href=<?php echo $date_completed_taxonomy_link ?>>
-				<?php echo $meta['date_completed'] ?>
-			</a>
+			<?php echo folio_return_custom_taxonomy( 'work_type' ); ?>
+			<?php echo folio_return_custom_taxonomy( 'date_completed' ); ?>
 
 		</p>
 
 	</header><!-- article-header -->
 
 	<div class="post__content">
+
 		<p><?php echo $meta['description'] ?></p>
+
 	</div>
 
-	<figure class="post__figure">
-		<?php
-			$images = explode(',', $meta['gallery'] );
+	<div class="post__gallery">
 
-			foreach ($images as $image) {
-				$picture =  wp_get_attachment_image( $image, 'medium', false );
-				
-				echo '<div class="post__image">' . $picture . '</div>';
-			}
-			
-		?>
-	</figure>
+		<?php echo folio_render_gallery( $meta['gallery'] ); ?>
+
+	</div>
 
 </article><!-- article -->
 
 <?php
 
-echo render_post_nav($work_type_taxonomy_link, 'work_type');
+echo folio_render_post_nav( 'work_type' );

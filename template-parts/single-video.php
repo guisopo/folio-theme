@@ -7,46 +7,42 @@
  * @package Folio
  */
 
-$id = get_the_ID();
-$work_data = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-$work_type_taxonomy_link = get_term_link( $work_data['work_type'], 'work_type');
-$date_completed_taxonomy_link = get_term_link( $work_data['date_completed'], 'date_completed');
+$meta = folio_get_post_meta( get_the_ID() );
 ?>
 
-<article class="article post work">
+<article class="post">
 
-	<header class="article-header post__header">
+	<header class="post__header">
 
-		<h1 class="post_title"><?php the_title(); ?></h1>
+		<h1 class="post__title"><?php the_title(); ?></h1>
 
-		<p class="taxonomy post__taxonomies">
+		<p class="taxonomies post__taxonomies">
 
-			<a class="taxonomy__link" href=<?php echo $work_type_taxonomy_link ?>>
-				<span><?php echo $work_data['work_type']; ?></span>
-			</a>
-
-			<a class="taxonomy__link" href=<?php echo $date_completed_taxonomy_link ?>>
-				<span><?php echo $work_data['date_completed']; ?></span>
-			</a>
+			<?php echo folio_return_custom_taxonomy( 'work_type' ); ?>
+			<?php echo folio_return_custom_taxonomy( 'date_completed' ); ?>
 
 		</p>
 
 	</header><!-- article-header -->
 
 	<div class="post__content">
-		<p><?php echo $work_data['description']; ?></p>
+
+		<p><?php echo $meta['description'] ?></p>
+
 	</div>
 
 	<div class="post__content">
-		<p><?php echo $work_data['credits']; ?></p>
+
+		<p><?php echo $meta['credits']; ?></p>
+
 	</div>
 
-  <figure class="work__image-container">
+	<figure class="work__image-container">
     <?php the_post_thumbnail( 'medium' ); ?>
   </figure>
 
-</article>
+</article><!-- article -->
 
 <?php
 
-echo render_post_nav($work_type_taxonomy_link, 'work_type');
+echo folio_render_post_nav( 'work_type' );
