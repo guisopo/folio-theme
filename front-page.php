@@ -13,6 +13,7 @@ get_header();
 <main class="content">
 
   <?php 
+    // Create UL with links to the given taxonomy
     echo create_taxonmy_list( 'work_type' ); 
   ?>
 

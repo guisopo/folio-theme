@@ -5,14 +5,13 @@
  * @see get_object_taxonomies()
  */
 function folio_return_custom_taxonomy( $custom_taxonomy) {
-  // Get post by post ID.
+
   if ( ! $post = get_post() ) {
     return '';
   }
 
   $output = array();
 
-  // Get the terms related to post.
   $terms = get_the_terms( $post->ID, $custom_taxonomy );
 
   if ( ! empty( $terms ) ) {
@@ -83,7 +82,7 @@ function create_taxonmy_list( $tax_name ) {
       ;
     } 
   } else {
-    return '<p>create_taxonmy_list() ERROR: Given taxonomy doesn\'t exist or is empty.</p>';
+    return '<p>ERROR <b>create_taxonmy_list()</b>: Given taxonomy doesn\'t exist or is empty.</p>';
   }
 
   $output .= '</ul>';
