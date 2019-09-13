@@ -9,15 +9,15 @@
 
 ?>
 
-<article>
+<article class="page">
 
-	<header>
+	<header class="page__header">
 
-		<h1><?php the_title(); ?></h1>
+		<h1 class="page_title"><?php the_title(); ?></h1>
 
 	</header>
 
-	<div>
+	<div class="page__content">
 
     <?php the_content(); ?>
       
