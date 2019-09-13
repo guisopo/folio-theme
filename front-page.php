@@ -12,29 +12,9 @@ get_header();
 
 <main class="content">
 
-  <ul class="work_types">
-    <?php
-      $terms_args = array(
-        'taxonomy'   => 'work_type',
-        'orderby'    => 'count',
-        'order'      => 'DESC'
-      );
-      $terms = get_terms( $terms_args );
-
-      foreach ( $terms as $term ) {
-
-        $term_link = esc_url( get_term_link( $term->name, $term->taxonomy ) );
-
-        echo (
-          '<li class="' . $term->taxonomy . '">
-              <a href="' . $term_link  . '">
-                '. $term->name .'
-              </a>
-          </li>'
-        );
-      }
-    ?>
-  </ul>
+  <?php 
+    echo create_taxonmy_list( 'work_type' ); 
+  ?>
 
   <div class="image-container">
     This will be the image container

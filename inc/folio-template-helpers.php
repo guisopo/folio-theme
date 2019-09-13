@@ -1,6 +1,6 @@
 <?php
 /**
- * Get taxonomies terms links.
+ * Get taxonomies terms links for single post.
  *
  * @see get_object_taxonomies()
  */
@@ -50,4 +50,43 @@ function render_post_nav( $go_back_link, $taxonomy ) {
         '. $next_link .'
       </span>
     </div>';
+}
+
+/**
+ * Create unordered list with given taxonomy.
+ *
+ * @see get_terms()
+ * @see get_term_link()
+ */
+function create_taxonmy_list( $tax_name ) {
+
+  $terms_args = array(
+    'taxonomy'   => $tax_name,
+    'orderby'    => 'count',
+    'order'      => 'DESC'
+  );
+
+  $terms = get_terms( $terms_args );
+
+  $output = '<ul class="taxonomy-list">';
+
+  if ( ! empty( $terms ) && taxonomy_exists( $tax_name ) ) {
+
+    foreach ( $terms as $term ) {
+
+      $term_link = esc_url( get_term_link( $term->name, $term->taxonomy ) );
+
+      $output .=
+        '<li class="taxonomy-item">
+            <a class="taxonomy-link" href="' . $term_link  . '">'. $term->name .'</a>
+        </li>'
+      ;
+    } 
+  } else {
+    return '<p>create_taxonmy_list() ERROR: Given taxonomy doesn\'t exist or is empty.</p>';
+  }
+
+  $output .= '</ul>';
+
+  return $output;
 }
