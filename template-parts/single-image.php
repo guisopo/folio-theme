@@ -9,6 +9,7 @@
 
 $id = get_the_ID();
 $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
+$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
 ?>
 
 <article class="post">

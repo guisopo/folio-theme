@@ -18,7 +18,7 @@ get_header();
       the_post();
       get_template_part( 'template-parts/single', get_post_format() );
       
-    endwhile; // End of the loop.
+    endwhile;
 
   endif;
 ?>

@@ -10,13 +10,13 @@
 get_header();
 ?>
 
-<h1 class="term-name"><?php single_term_title(); ?> </h1>
+<h1 class="archive-title"><?php single_term_title(); ?> </h1>
 
 <?php 
 if ( have_posts() ) :
 ?>
 
-  <ul class="term-list">
+  <ul class="post-list">
     <?php
 
     while ( have_posts() ) :

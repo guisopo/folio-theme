@@ -8,9 +8,9 @@
  */
 
   $id = get_the_ID();
-  $work_data = get_post_meta( $id, '_avant_folio_work_info_key', true); 
-	$work_type_taxonomy_link = get_term_link( $work_data['work_type'], 'work_type');
-	$date_completed_taxonomy_link = get_term_link( $work_data['date_completed'], 'date_completed');
+  $meta = get_post_meta( $id, '_avant_folio_work_info_key', true); 
+	$work_type_taxonomy_link = get_term_link( $meta['work_type'], 'work_type');
+	$date_completed_taxonomy_link = get_term_link( $meta['date_completed'], 'date_completed');
 ?>
 
 <article class="article post">
@@ -22,11 +22,11 @@
 		<p class="taxonomies post__taxonomies">
 
 			<a class="taxonomy__link" href=<?php echo $work_type_taxonomy_link ?>>
-				<?php echo $work_data['work_type'] ?>
+				<?php echo $meta['work_type'] ?>
 			</a>
 
 			<a class="taxonomy__link" href=<?php echo $date_completed_taxonomy_link ?>>
-				<?php echo $work_data['date_completed'] ?>
+				<?php echo $meta['date_completed'] ?>
 			</a>
 
 		</p>
@@ -34,12 +34,12 @@
 	</header><!-- article-header -->
 
 	<div class="post__content">
-		<p><?php echo $work_data['description'] ?></p>
+		<p><?php echo $meta['description'] ?></p>
 	</div>
 
 	<figure class="post__figure">
 		<?php
-			$images = explode(',', $work_data['gallery'] );
+			$images = explode(',', $meta['gallery'] );
 
 			foreach ($images as $image) {
 				$picture =  wp_get_attachment_image( $image, 'medium', false );

@@ -23,11 +23,13 @@
   <div class="page">
 
     <header class="page__header">
-      
+
       <div class="header__logo">
+
         <a href="<?php echo esc_url( home_url( '/') ); ?>">
           <?php bloginfo( 'name' ); ?>
         </a>
+
       </div>
   
     </header><!-- .page__header-->

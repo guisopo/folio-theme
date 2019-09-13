@@ -8,7 +8,7 @@
  */
 
 $id = get_the_ID();
-$work_data = get_post_meta( $id, '_avant_folio_work_info_key', true);
+$meta = get_post_meta( $id, '_avant_folio_work_info_key', true);
 $image_url = get_the_post_thumbnail_url( $id, ['100', '100'] );
 ?>
 
@@ -26,16 +26,16 @@ $image_url = get_the_post_thumbnail_url( $id, ['100', '100'] );
 
     <p class="post-item__data">
       <span><?php the_title(); ?></span>,&nbsp
-      <span><?php echo $work_data['date_completed']; ?></span>
+      <span><?php echo $meta['date_completed']; ?></span>
     </p>
 
     <p class="post-item__data">
-      <span><?php echo $work_data['material']; ?></span>
+      <span><?php echo $meta['material']; ?></span>
     </p>
 
     <p class="post-item__data">
-      <span><?php echo $work_data['dimensions']; ?></span>
-      <span><?php echo $work_data['units']; ?></span>
+      <span><?php echo $meta['dimensions']; ?></span>
+      <span><?php echo $meta['units']; ?></span>
     </p>
 
   </figcaption>
