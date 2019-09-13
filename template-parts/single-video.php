@@ -38,7 +38,9 @@ $meta = folio_get_post_meta( get_the_ID() );
 	</div>
 
 	<figure class="work__image-container">
-    <?php the_post_thumbnail( 'medium' ); ?>
+
+		<?php the_post_thumbnail( 'medium' ); ?>
+		
   </figure>
 
 </article><!-- article -->

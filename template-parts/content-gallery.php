@@ -24,9 +24,7 @@ $meta = folio_get_post_meta( get_the_ID() );
 
   <figcaption class="post-item__information">
 
-    <?php 
-      folio_render_work_info($meta); 
-    ?>
+    <?php folio_render_work_info($meta); ?>
     
   </figcaption>
 

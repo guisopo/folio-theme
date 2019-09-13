@@ -6,6 +6,8 @@
  *
  * @package Folio
  */
+
+$meta = folio_get_post_meta( get_the_ID() );
 ?>
 
 <li class="post-item post-item--grid">
@@ -22,11 +24,7 @@
 
   <figcaption class="post-item__information">
 
-    <?php 
-      $meta = folio_get_post_meta( get_the_ID() );
-
-      folio_render_work_info($meta);
-    ?>
+    <?php folio_render_work_info($meta); ?>
     
   </figcaption>
   
